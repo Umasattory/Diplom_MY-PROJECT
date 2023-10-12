@@ -3,40 +3,31 @@
  * на сервер.
  * */
 const createRequest = (options = {}) => {
+   let url = options.url;
+   let formData = null;
+
    const xhr = new XMLHttpRequest();
    xhr.responseType = 'json';
-   const url = options.url;
-   const formData = null;
 
    if (options.data) {
       if (options.method === 'GET') {
-         url += '?' + Object.entries(data).map(
-            entry => entry.map(encodeURIComponent).join('=')).join('&');
+         url += '?' + Object.entries(options.data).map(entry => entry.map(encodeURIComponent).join('=')).join('&');
       } else {
          formData = new FormData();
-         Object.entries(data).forEach(it=>formData.append(...it))
+         Object.entries(options.data).forEach(it => formData.append(Array.form(it)));
       }
    }
-   if(options.callback){
-      try {
-         xhr.onreadystatechange = function () {
-            const err = null;
-            const response = null;      
-            if (xhr.response?.success) {
-               callback(err, response = JSON.parse(xhr.responseText));
-               console.log(response);
-            } else {
-               callback(err = xhr.response, response);
-               console.error(err)
-            }
-         }
-         xhr.open(options.method, url);
-         xhr.send(formData)      
-      } catch (error) {
-         callback(error)
-      }
+   try {
+      xhr.open(options.method, url);
+      xhr.send(formData);
+
+      console.log("Вариант Основной")
+   } catch (error) {
+      
+      console.log("Ошибка данных!");
    }
-   xhr.onerror = function () {
-      throw Error('Ошибка запроса, нет соединения с сервером')
+
+   xhr.onerror = (e) => {
+      throw Error("Нет данных. Ошибка соединения -" + e);
    }
 };
