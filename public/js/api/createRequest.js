@@ -17,19 +17,26 @@ const createRequest = (options = {}) => {
          Object.entries(data).forEach(it=>formData.append(...it))
       }
    }
-
-   xhr.onreadystatechange = function () {
-      const err = null;
-      const response = null;      
-      if (xhr.response?.success) {
-         callback(err, response = xhr.responseText);
-         console.log(response);
-      } else {
-         callback(err = xhr.response, response);
-         console.error(err)
+   if(options.callback){
+      try {
+         xhr.onreadystatechange = function () {
+            const err = null;
+            const response = null;      
+            if (xhr.response?.success) {
+               callback(err, response = JSON.parse(xhr.responseText));
+               console.log(response);
+            } else {
+               callback(err = xhr.response, response);
+               console.error(err)
+            }
+         }
+         xhr.open(options.method, url);
+         xhr.send(formData)      
+      } catch (error) {
+         callback(error)
       }
    }
-
-   xhr.open(options.method, url);
-   xhr.send(formData)
+   xhr.onerror = function () {
+      throw Error('Ошибка запроса, нет соединения с сервером')
+   }
 };
