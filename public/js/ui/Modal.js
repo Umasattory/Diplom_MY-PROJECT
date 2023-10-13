@@ -25,7 +25,7 @@ class Modal {
    * (с помощью метода Modal.onClose)
    * */
   registerEvents() {
-    document.querySelectorAll('[data-dismiss="modal"]').forEach((item) => {
+    this.element.querySelectorAll('[data-dismiss="modal"]').forEach((item) => {
       item.addEventListener('click', (e) => {
         e.preventDefault();
         this.onClose(e);
@@ -52,6 +52,6 @@ class Modal {
    * Закрывает окно: удаляет CSS-свойство display
    * */
   close(){
-    this.element.style.display = "none";
+    this.element.style.removeProperty('display');
   }
 }
