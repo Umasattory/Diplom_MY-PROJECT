@@ -11,8 +11,11 @@ class UserWidget {
    * Если переданный элемент не существует,
    * необходимо выкинуть ошибку.
    * */
-  constructor(element){
-
+  constructor(element) {
+    if (this.element = '') {
+      throw Error('Пользователь не определен!');
+    }
+    this.element = element;
   }
 
   /**
@@ -23,6 +26,9 @@ class UserWidget {
    * авторизованного пользователя
    * */
   update(){
-
+    if (User.current()) {
+      document.querySelector('.user-name').textContent = User.current().name;
+      console.log(User.current().name)
+    }
   }
 }

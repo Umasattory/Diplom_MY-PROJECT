@@ -23,20 +23,6 @@ class Sidebar {
       document.querySelector('.sidebar-mini').classList.toggle('sidebar-open');
       document.querySelector('.sidebar-mini').classList.toggle('sidebar-collapse');
     })
-
-    document.querySelector('.menu-item_logout').addEventListener('click', e => {
-      e.preventDefault();
-      User.logout((err, response) => {
-        if (response && response.success) {
-          App.setState('init');
-        }
-      })
-    })
-
-    document.querySelector('.menu-item_login').addEventListener('click', e => {
-      e.preventDefault();
-      App.getModal('login').open();
-    })
   }
 
   /**
@@ -47,7 +33,7 @@ class Sidebar {
    * выходу устанавливает App.setState( 'init' )
    * */
   static initAuthLinks() {
-    document.querySelector('.menu-item_login').addEventListener('click', (e) => {
+    document.querySelector('.menu-item_login').addEventListener('click', e => {
       e.preventDefault();
       App.getModal('login').open();
     });
@@ -55,9 +41,13 @@ class Sidebar {
       e.preventDefault();
       App.getModal('register').open();
     });
-    document.querySelector('.menu-item_logout').addEventListener('click', (e) => {
+    document.querySelector('.menu-item_logout').addEventListener('click', e => {
       e.preventDefault();
-      App.getModal('logout').open();
+      User.logout((err, response) => {
+        if (response && response.success) {
+          App.setState('init');
+        }
+      })
     })
   }
 }
