@@ -30,7 +30,11 @@ class AccountsWidget {
    * вызывает AccountsWidget.onSelectAccount()
    * */
   registerEvents() {
-
+    this.element.querySelector('.create-account').addEventListener('click', (e) => {
+      if (e.target.classlist.contains('header')) {return;}
+      e.preventDefault();
+      this.onSelectAccount(e.target.closest('li'))
+    })
   }
 
   /**
@@ -72,8 +76,12 @@ class AccountsWidget {
    * счёта класс .active.
    * Вызывает App.showPage( 'transactions', { account_id: id_счёта });
    * */
-  onSelectAccount( element ) {
-
+  onSelectAccount(element) {
+    if (this.prevActiveElement) {
+      this.prevActiveElement.classlist.remove('active')
+    }
+    element.classlist.add('active');
+    this.prevActiveElement = element;
   }
 
   /**
