@@ -12,7 +12,7 @@ class Modal {
    * необходимо выкинуть ошибку.
    * */
   constructor(element) {
-    if (this.element='') {
+    if (this.element = '') {
       throw Error("Ошибка! Элемент отсутствует");
     }
     this.element = element;
