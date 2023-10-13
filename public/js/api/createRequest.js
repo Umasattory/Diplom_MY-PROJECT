@@ -14,7 +14,7 @@ const createRequest = (options = {}) => {
          url += '?' + Object.entries(options.data).map(entry => entry.map(encodeURIComponent).join('=')).join('&');
       } else {
          formData = new FormData();
-         Object.entries(options.data).forEach(it => formData.append(Array.form(it)));
+         Object.entries(options.data).forEach(it => formData.append(...it));
       }
    }
    try {
