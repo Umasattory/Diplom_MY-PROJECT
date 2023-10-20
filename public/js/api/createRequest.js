@@ -23,15 +23,15 @@ const createRequest = (options = {}) => {
       xhr.onerror = () => { console.log(`Произошла ошибка при отправке данных. ошибка - ${xhr.status}`) }
       xhr.onreadystatechange = () => {
          if (xhr.readyState === xhr.DONE) {
-            let error = null, response = null;
+            let err = null, resp = null;
             try {
                if (xhr.response?.cuccess) {
-                  response = xhr.response;
+                  resp = xhr.response;
                }
-            } catch (err) {
-               error = err;
+            } catch (e) {
+               err = e;
             }
-            options.callback(error, response);
+            options.callback(err, resp);
          }
       }
    }

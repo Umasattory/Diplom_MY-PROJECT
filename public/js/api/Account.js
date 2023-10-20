@@ -12,7 +12,6 @@ class Account extends Entity {
     createRequest({
       method: 'GET',
       url: this.URL + '/' + id,
-      data,
       callback
     })
   }
