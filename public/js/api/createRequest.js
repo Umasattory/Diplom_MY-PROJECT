@@ -20,21 +20,18 @@ const createRequest = (options = {}) => {
    };
 
    if (options.callback) {
-      xhr.onerror = () => {console.log(`Произошла ошибка при отправке данных. ошибка - ${xhr.status}`)}
-
+      xhr.onerror = () => { console.log(`Произошла ошибка при отправке данных. ошибка - ${xhr.status}`) }
       xhr.onreadystatechange = () => {
          if (xhr.readyState === xhr.DONE) {
-            let error = null, resp = null;
+            let error = null, response = null;
             try {
                if (xhr.response?.cuccess) {
-                  resp = xhr.response;
-                  console.log(resp);
+                  response = xhr.response;
                }
             } catch (err) {
                error = err;
-               console.log(error)
             }
-            options.callback(error, resp);
+            options.callback(error, response);
          }
       }
    }
