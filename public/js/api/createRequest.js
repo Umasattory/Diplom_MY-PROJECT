@@ -2,6 +2,7 @@
  * Основная функция для совершения запросов
  * на сервер.
  * */
+
 const createRequest = (options = {}) => {
    let url = options.url;
    let formData = null;
@@ -18,16 +19,22 @@ const createRequest = (options = {}) => {
       }
    };
 
-
-   try {
-      xhr.open(options.method, url);
-      xhr.send(formData);
-      //callback(null, response.success)
-   } catch(err) {
-      //callback(response, null);
-   };
-
-   xhr.onerror = (e) => {
-      throw Error("Нет данных. Ошибка соединения -" + e);
+   if (options.callback) {
+      xhr.onload = () => {
+         let error = null, resp = null;
+         try {
+            if (xhr.response?.cuccess) {
+               resp = xhr.response;
+               console.log(resp);
+            }
+         } catch (err) {
+            error = err;
+            console.log(error)
+         }
+         options.callback(error, resp);
+      }
    }
+
+   xhr.open(options.method, url);
+   xhr.send(formData);
 };
