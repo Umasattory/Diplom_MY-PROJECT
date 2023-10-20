@@ -4,10 +4,9 @@
  * */
 
 const createRequest = (options = {}) => {
-   let url = options.url;
+   const xhr = new XMLHttpRequest();   
    let formData = null;
-
-   const xhr = new XMLHttpRequest();
+   let url = options.url;
    xhr.responseType = 'json';
 
    if (options.data) {
@@ -25,7 +24,7 @@ const createRequest = (options = {}) => {
          if (xhr.readyState === xhr.DONE) {
             let err = null, resp = null;
             try {
-               if (xhr.resp?.cuccess) {
+               if (xhr.response?.cuccess) {
                   resp = xhr.response;
                }
             } catch (e) {

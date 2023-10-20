@@ -75,8 +75,8 @@ class App {
    * */
   static initForms() {
     this.forms = {
-      login: new LoginForm(document.querySelector("#login-form")),
-      register: new RegisterForm(document.querySelector("#register-form")),
+      login: new LoginForm(document.querySelector('#login-form')),
+      register: new RegisterForm(document.querySelector('#register-form')),
       createAccount: new CreateAccountForm(
         document.querySelector("#new-account-form")
       ),

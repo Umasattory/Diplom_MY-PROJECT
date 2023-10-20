@@ -1,3 +1,4 @@
+
 /**
  * Класс User управляет авторизацией, выходом и
  * регистрацией пользователя из приложения
@@ -38,13 +39,13 @@ class User {
       url: this.URL + '/current',
       method: 'GET',
       //responseType: 'json',
-      callback: (err, resp) => {
-        if (resp && resp.user) {
-          this.setCurrent(resp.user);
+      callback: (err, response) => {
+        if (response && response.user) {
+          this.setCurrent(response.user);
         } else {
           this.unsetCurrent();
         }
-        callback(err, resp);
+        callback(err, response);
       }
     });
   }
@@ -61,11 +62,11 @@ class User {
       method: 'POST',
       //responseType: 'json',
       data,
-      callback: (err, resp) => {
-        if (resp && resp.user) {
-          this.setCurrent(resp.user);
+      callback: (err, response) => {
+        if (response && response.user) {
+          this.setCurrent(response.user);
         }
-        callback(err, resp);
+        callback(err, response);
       }
     });
   };
@@ -82,11 +83,11 @@ class User {
       method: 'POST',
       //responseType: 'json',
       data,
-      callback: (err, resp) => {
-        if (resp && resp.user) {
-          this.setCurrent(resp.user);
+      callback: (err, response) => {
+        if (response && response.user) {
+          this.setCurrent(response.user);
         }
-        callback(err, resp);
+        callback(err, response);
       }
     });
   }
@@ -100,11 +101,11 @@ class User {
       url: this.URL + '/logout',
       method: 'POST',
       //responseType: 'json',
-      callback: (err, resp) => {
-        if (resp && resp.success) {
+      callback: (err, response) => {
+        if (response && response.success) {
           this.unsetCurrent();
         }
-        callback(err, resp);
+        callback(err, response);
       }
     });
   }

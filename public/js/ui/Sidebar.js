@@ -32,22 +32,25 @@ class Sidebar {
    * При нажатии на кнопку выхода вызывает User.logout и по успешному
    * выходу устанавливает App.setState( 'init' )
    * */
-  static initAuthLinks() {
-    document.querySelector('.menu-item_login').addEventListener('click', e => {
-      e.preventDefault();
-      App.getModal('login').open();
-    });
-    document.querySelector('.menu-item_register').addEventListener('click', (e) => {
-      e.preventDefault();
-      App.getModal('register').open();
-    });
-    document.querySelector('.menu-item_logout').addEventListener('click', e => {
-      e.preventDefault();
-      User.logout((err, resp) => {
-        if (resp && resp.success) {
-          App.setState('init');
-        }
+  
+   static initAuthLinks() {
+     document.querySelector('.menu-item_login').addEventListener('click', e => {
+       e.preventDefault();
+       App.getModal('login').open();
+     });
+
+     document.querySelector('.menu-item_register').addEventListener('click', (e) => {
+       e.preventDefault();
+       App.getModal('register').open();
+     });
+
+      document.querySelector('.menu-item_logout').addEventListener('click', e => {
+        e.preventDefault();
+        User.logout((err, resp) => {
+          if (resp && resp.success) {
+            App.setState('init');
+          }
+        })
       })
-    })
   }
 }
