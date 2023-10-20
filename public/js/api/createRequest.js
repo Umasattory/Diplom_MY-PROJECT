@@ -25,7 +25,7 @@ const createRequest = (options = {}) => {
          if (xhr.readyState === xhr.DONE) {
             let err = null, resp = null;
             try {
-               if (xhr.response?.cuccess) {
+               if (xhr.resp?.cuccess) {
                   resp = xhr.response;
                }
             } catch (e) {
