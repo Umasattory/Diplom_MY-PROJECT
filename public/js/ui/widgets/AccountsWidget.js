@@ -49,8 +49,8 @@ class AccountsWidget {
    * */
   update() {
     if (User.current) {
-      Account.list(null, (err, resp) => {
-        if (resp && resp.success) {
+      Account.list(null, (err, response) => {
+        if (response && response.success) {
           this.clear();
           response.data.forEach(item => {
             this.renderItem(item)
@@ -104,6 +104,6 @@ class AccountsWidget {
    * и добавляет его внутрь элемента виджета
    * */
   renderItem(data){
-    this.element.insertAdjacentHTML('beforend', this.getAccountHTML(data))
+    this.element.insertAdjacentHTML('beforeend', this.getAccountHTML(data))
   }
 }

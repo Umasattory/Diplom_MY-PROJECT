@@ -5,7 +5,7 @@
 
 const createRequest = (options = {}) => {
    const xhr = new XMLHttpRequest();   
-   let formData = null;
+   let formData = null, err = null, resp = null;
    let url = options.url;
    xhr.responseType = 'json';
 
@@ -18,23 +18,22 @@ const createRequest = (options = {}) => {
       }
    };
 
-   if (options.callback) {
-      xhr.onerror = () => { console.log(`Произошла ошибка при отправке данных. ошибка - ${xhr.status}`) }
+   if (options.callback) {   
       xhr.onreadystatechange = () => {
          if (xhr.readyState === xhr.DONE) {
-            let err = null, resp = null;
             try {
-               if (xhr.response?.cuccess) {
+               if (xhr.response.success) {
                   resp = xhr.response;
                }
-            } catch (e) {
-               err = e;
+            } catch (error) {
+               err = error;
             }
             options.callback(err, resp);
          }
       }
    }
-
    xhr.open(options.method, url);
-   xhr.send(formData);
+   xhr.send(formData);   
+
+   xhr.onerror = () => { console.log(`Произошла ошибка при отправке данных. ошибка - ${xhr.status}`) }
 };
