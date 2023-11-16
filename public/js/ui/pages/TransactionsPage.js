@@ -11,14 +11,15 @@ class TransactionsPage {
    * через registerEvents()
    * */
   constructor( element ) {
-
+    this.element = element;
+    this.registerEvents();
   }
 
   /**
    * Вызывает метод render для отрисовки страницы
    * */
   update() {
-
+    this.render(this.lastOptions);
   }
 
   /**
@@ -60,8 +61,16 @@ class TransactionsPage {
    * Получает список Transaction.list и полученные данные передаёт
    * в TransactionsPage.renderTransactions()
    * */
-  render(options){
-
+  render(options) {
+    if (options === undefined) {
+      return;
+    }
+    this.lastOptions = options;
+    Account.get(options.account_id, (err, resp) => {
+      if (resp && resp.success) {
+        this.element.querySelector('.content-title').textContent = resp.data.name;
+      }
+    });
   }
 
   /**

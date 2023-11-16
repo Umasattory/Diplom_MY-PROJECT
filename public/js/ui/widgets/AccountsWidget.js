@@ -2,7 +2,6 @@
  * Класс AccountsWidget управляет блоком
  * отображения счетов в боковой колонке
  * */
-
 class AccountsWidget {
   /**
    * Устанавливает текущий элемент в свойство element
@@ -31,10 +30,27 @@ class AccountsWidget {
    * */
   registerEvents() {
     this.element.querySelector('.create-account').addEventListener('click', (e) => {
-      if (e.target.classlist.contains('header')) {return;}
+      e.preventDefault();
+      //console.log(this.element)
+      App.getModal('createAccount').open();
+    });
+
+    this.element.addEventListener('click', (e) => {
+      if (e.target.className == 'header') {
+        return;
+      } else {
+        this.onSelectAccount(e.target.closest('li'))
+      }
+    })
+
+
+  /*this.element.addEventListener('click', (e) => {
+      if (e.target.classlist.contains('header')) {
+        return;
+      };
       e.preventDefault();
       this.onSelectAccount(e.target.closest('li'))
-    })
+    }); */
   }
 
   /**
@@ -81,7 +97,9 @@ class AccountsWidget {
       this.prevActiveElement.classlist.remove('active')
     }
     element.classlist.add('active');
-    this.prevActiveElement = element;
+    this.prevActiveElement = element; 
+    console.log(element.dataset.id);
+    App.showPage('transactions', { account_id: element.dataset.id });
   }
 
   /**

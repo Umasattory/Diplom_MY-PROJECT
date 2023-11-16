@@ -11,8 +11,12 @@ class TransactionsWidget {
    * Если переданный элемент не существует,
    * необходимо выкинуть ошибку.
    * */
-  constructor( element ) {
-
+  constructor(element) {
+    try {
+      
+    } catch (err) {
+      new Error("Cчет не существует");
+    }
   }
   /**
    * Регистрирует обработчики нажатия на
